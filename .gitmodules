@@ -1,0 +1,12 @@
+[submodule "vendor/github.com/Unknwon/com"]
+	path = vendor/github.com/Unknwon/com
+	url = https://github.com/Unknwon/com
+[submodule "vendor/github.com/go-macaron/inject"]
+	path = vendor/github.com/go-macaron/inject
+	url = https://github.com/go-macaron/inject
+[submodule "vendor/gopkg.in/ini.v1"]
+	path = vendor/gopkg.in/ini.v1
+	url = https://gopkg.in/ini.v1
+[submodule "vendor/gopkg.in/macaron.v1"]
+	path = vendor/gopkg.in/macaron.v1
+	url = https://gopkg.in/macaron.v1
