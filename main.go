@@ -1,5 +1,7 @@
 package main
 
+//go:generate go-bindata -debug -pkg assets -o modules/assets/assets.go -prefix assets/ assets/...
+
 import (
 	"flag"
 	"fmt"
@@ -11,6 +13,7 @@ import (
 	"gopkg.in/macaron.v1"
 
 	"database/sql"
+	"github.com/bozaro/tech-db-homework/modules/assets"
 	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/lib/pq"
 	_ "github.com/mattn/go-sqlite3"
@@ -36,14 +39,10 @@ func main() {
 		glog.Fatal(err)
 	}
 
-	migrations := &migrate.MemoryMigrationSource{
-		Migrations: []*migrate.Migration{
-			&migrate.Migration{
-				Id:   "123",
-				Up:   []string{"CREATE TABLE people (id INT)"},
-				Down: []string{"DROP TABLE people"},
-			},
-		},
+	migrations := &migrate.AssetMigrationSource{
+		Asset:    assets.Asset,
+		AssetDir: assets.AssetDir,
+		Dir:      "db/migrations",
 	}
 
 	n, err := migrate.Exec(db, "sqlite3", migrations, migrate.Up)
