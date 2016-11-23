@@ -7,10 +7,13 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/rubenv/sql-migrate"
 	"gopkg.in/macaron.v1"
 
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/lib/pq"
+	_ "github.com/mattn/go-sqlite3"
 )
 
 func usage() {
@@ -27,10 +30,27 @@ func init() {
 }
 
 func main() {
-	db, err := sql.Open("mysql", "user:password@tcp(127.0.0.1:3306)/hello")
+	//db, err := sql.Open("mysql", "user:password@tcp(127.0.0.1:3306)/hello")
+	db, err := sql.Open("sqlite3", "tech-db-homework.db")
 	if err != nil {
 		glog.Fatal(err)
 	}
+
+	migrations := &migrate.MemoryMigrationSource{
+		Migrations: []*migrate.Migration{
+			&migrate.Migration{
+				Id:   "123",
+				Up:   []string{"CREATE TABLE people (id INT)"},
+				Down: []string{"DROP TABLE people"},
+			},
+		},
+	}
+
+	n, err := migrate.Exec(db, "sqlite3", migrations, migrate.Up)
+	if err != nil {
+		glog.Fatal(err)
+	}
+	fmt.Printf("Applied %d migrations!\n", n)
 
 	err = db.Ping()
 	if err != nil {
