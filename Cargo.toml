@@ -4,3 +4,8 @@ version = "0.1.0"
 authors = ["Artem V. Navrotskiy <bozaro@yandex.ru>"]
 
 [dependencies]
+dotenv = "0.8.0"
+iron = "0.5.1"
+hyper = "0.10.12"
+router = "0.5.1"
+mount = "0.3.0"
