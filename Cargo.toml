@@ -2,6 +2,8 @@
 name = "tech-db-homework"
 version = "0.1.0"
 authors = ["Artem V. Navrotskiy <bozaro@yandex.ru>"]
+build = "build.rs"
+include = ["assets"]
 
 [dependencies]
 dotenv = "0.8.0"
@@ -9,3 +11,10 @@ iron = "0.5.1"
 hyper = "0.10.12"
 router = "0.5.1"
 mount = "0.3.0"
+url="1.5.1"
+includedir = "0.2.2"
+mime_guess = "2.0.0-alpha.2"
+phf = "0.7.21"
+
+[build-dependencies]
+includedir_codegen = "0.2.2"

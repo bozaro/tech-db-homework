@@ -1,9 +1,13 @@
 extern crate dotenv;
 #[macro_use]
+    extern crate mime_guess;
 extern crate iron;
 extern crate hyper;
 extern crate router;
 extern crate mount;
+extern crate url;
+extern crate phf;
+extern crate includedir;
 
 mod context;
 mod endpoints;
