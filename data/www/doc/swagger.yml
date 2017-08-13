@@ -1,0 +1,53 @@
+swagger: '2.0'
+info:
+  title: homework
+  description: |
+    Утилита для проведения рубежного контроля на курсе по базам данных в
+    Технопарке Mail.ru (https://park.mail.ru).
+  version: "0.1.0"
+schemes:
+- http
+- https
+basePath: /api
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /sql/check/{task}:
+    post:
+      summary: Проверка текущего варианта.
+      description: |
+        Проверка текущего варианта.
+        Студент отправляет свой вариант запроса, а ему выдаётся полученный результат запроса.
+      operationId: sqlCheck
+      parameters:
+      - name: task
+        in: path
+        description: Идентификатор выполняемого задания.
+        required: true
+        type: string
+      - name: query
+        in: body
+        description: Запрос, который нужно проверить.
+        required: true
+        schema:
+          $ref: '#/definitions/SqlCheckRequest'
+      responses:
+        200:
+          description: |
+            Результат провекри запроса студента.
+        404:
+          description: |
+            Данное задание не сущетвует.
+definitions:
+  SqlCheckRequest:
+    type: object
+    properties:
+      query:
+        description: SQL-запрос, который нужно проверить.
+        type: string
+        example: "SELECT 1"
+        x-isnullable: false
+    required:
+    - query

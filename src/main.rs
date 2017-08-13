@@ -1,6 +1,6 @@
 extern crate dotenv;
 #[macro_use]
-    extern crate mime_guess;
+extern crate mime_guess;
 extern crate iron;
 extern crate hyper;
 extern crate router;
@@ -48,7 +48,7 @@ impl NetworkListener for TcpListenerNoDelay {
 fn main() {
     dotenv().ok();
 
-    let router = declare_endpoints(Context {});
+    let router = declare_endpoints(Arc::new(Context {}));
 
     // Start server
     let addr = env::var("LISTEN").unwrap_or("localhost:5000".to_string());
